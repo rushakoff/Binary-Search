@@ -1,0 +1,37 @@
+1. Hours to complete the project: about 8 hours
+
+2. Provide a short description of how you approached each problem, issues you 
+   encountered, and how you resolved those issues.
+
+   Problem 1 (Autocomplete Term): 
+    At first I wasn't sure how to start this one. I was originally going to initiate a list with 2 indices for the query and the weight, but I kept reading through the code and noticed the string method used the variable query and weight. This hinted me toward beginning by initiating those variables. From there I created the constructors wand started work on the comparators. I originally created all the comparators from scratch as shown in the ReverseWeightOrder function (Side note: I ended up having to reverse the greater / less than signs to output a reverse order) but found that java wouldn't let me use the greater or less than operators to compare strings. I struggled with this for a while before finding online an example of comparator in which all they did was use the compareTo() function within their custom comparator (link in cited sources). That seemed like the simplest solution and it ended up working. For the basic comparator I just use the compareTo function with the query variable of the term object, but for the prefix order comparator I needed to look up how to create substrings. Once I knew how to create substrings I just ran the compareTo function on the substrings of the term. Later on I found that I would also need to add a conditional that would check the size of the second term and just compare the first term to the whole second term if it is shorter than the substring of the first term. Otherwise I would get an out of bounds error. I also struggled with the difference between the comparator<Term> by(compare function) and the compare function itself. I wasn't quite sure what to do with each but ultimately ended up putting my comparing algorithm within the compare function and just returning it in the comparator function. 
+    
+   Problem 2 (Binary Search Deluxe):
+    This section wasn't too bad. I started by copying the example code from the lecture notes 'Analysis of Algorithms' for binary sorting and then modified it to use the custom comparitor and return a different result. My strategy for finding the left and right index is to first run the binary search algorith, but once that finishes instead of returning what was found, I check every index toward the left or right side of the found index until the element of that index doesn't compare equal to the search key anymore. At first I checked if the index element equalled the key, which was the second most consuming snag for me. Once I realized, "oh wait of course 'cooking' is never going to equal 'cook'" It was a fairly easy fix to make. The third most time consuming snag I encountered was the index out of range issue mentioned in problem 1. It was easy to find and fix the issue but my original method was to skip comparing words that were shorter than the search key, but I knew that wasn't right. After a moment I realized I could just compare the search substring with the full shorter word and just remove the substring section from the second term entirely. 
+
+   Problem 3 (Autocomplete):
+    This was potentially the most frustating but funniest section of the project for me. This portion of the project is almost entirely borrowed code from the main method of the BinarySearchDeluxe.java. I recognized that both functions basically did what that main function was doing, with one function being a different output. So I thought that copying the code from the other file would be pretty straightforward and for the most part it was. I needed to change the middle variable passed in from "prefix" to "term", which took me a lot longer to realize than it really should have. For the allMatches function I changed the output to be a new list of Terms created from the terms found between the first and last index of the binary search. 
+    I mentioned the second and third most time consuming issues I ran into during this project earlier. Which brings me to the first most time consuming and, in hindsight, funniest issue I ran into. In my mind the logic of all this code should have been working fine but seemingly wasnt. I was testing the script with the input shown in the example of the pdf and just wasn't getting back the same results the example had. I typed in 'm' and only got a return of 2 results: merter and maalot, as opposed to Mumbai, Mexico, Manila ect. I poored over my code many times, checked each line many times. I tested several changes and spent about 2 hours alone on just this one issue. Then it donned on me... I had been testing this whole time with 'm', I SHOULD have been testing with 'M'. To my dismay I had spent roughly 2 hours debugging code that was working completely fine assuming I put in the correct input! I questioned whether I should find a way to modify the code to be non-case sensitive but I didn't see it mentioned within the project guidelines and was unsure how badly I would break my code attempting to add in a feature I don't actually know how to do so I decided against it. 
+   
+3. Did you receive help from anyone? List their names, status (classmate, 
+   CS210 grad, TA, other), and the nature of help received.
+
+   Name               Status       Help Received
+   ----               ------       -------------
+
+    No help but here are my cited internet sources.
+    Binary search code example from Lecture notes "Analysis of Algorithms"
+    How I learned to create substrings: https://howtodoinjava.com/java/string/java-string-substring-example/
+    Where I learned the compareTo() method: https://www.geeksforgeeks.org/comparator-interface-java/
+    some reference I used about immutable objects: https://www.baeldung.com/java-immutable-object
+
+4. List any other comments here. Feel free to provide any feedback on how
+   much you learned from doing the assignment, and whether you enjoyed
+   doing it.
+
+   There are still a lot of things I struggle with in java, but I am slowly getting the hang of it. The biggest hurdle I'm still having so far finding the difference between different functions/classes/objects/implementations/ect. For example I wasn't sure for a while why we have: 
+   
+   "public static Comparator<Term> byReverseWeightOrder()" return "private static class ReverseWeightOrder implements Comparator<Term>" 
+   
+   instead of just implementing the Comparator in the first one. I sort of understand what its doing but not clear on why it has to do it that way. 
+    It also takes me a long time to come up with simple algorithms like finding the first and last index in BinarySearchDeluxe. Explaining it after the fact, it sounds like a pretty simple and obvious solution but finding a solution like that comes after a lot of thought paralysis. It worries me to think that without the example code for binary search I may not have figured out my own way to do it, or at least if I did it would have been nowhere near as efficient or elegant as the example code. 
